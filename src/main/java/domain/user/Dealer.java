@@ -4,11 +4,13 @@ import domain.card.Card;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * 게임 딜러를 의미하는 객체
  */
 public class Dealer {
+    private final String TO_STRING_SEPARATOR = ", ";
     private final List<Card> cards = new ArrayList<>();
 
     public Dealer() {
@@ -38,5 +40,11 @@ public class Dealer {
 
     public boolean isOver21() {
         return calculateTotal() > 21;
+    }
+
+    public String getCards() {
+        return cards.stream()
+                .map(Card::toString)
+                .collect(Collectors.joining(TO_STRING_SEPARATOR));
     }
 }

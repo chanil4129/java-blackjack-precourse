@@ -4,11 +4,13 @@ import domain.card.Card;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * 게임 참여자를 의미하는 객체
  */
 public class Player {
+    private final String TO_STRING_SEPARATOR = ", ";
     private final String name;
     private final double bettingMoney;
     private final List<Card> cards = new ArrayList<>();
@@ -57,5 +59,11 @@ public class Player {
 
     public int calculateRevenue(int resultMoney) {
         return resultMoney - (int) bettingMoney;
+    }
+
+    public String getCards() {
+        return cards.stream()
+                .map(Card::toString)
+                .collect(Collectors.joining(TO_STRING_SEPARATOR));
     }
 }

@@ -33,9 +33,9 @@ public class OutputView {
                 .map(Player::getName)
                 .collect(Collectors.joining(", "));
         System.out.println(String.format(DEAL_CARDS_MESSAGE, playersWithComma));
-        System.out.println(String.format(DEALER_CARDS_MESSAGE, dealer.toString()));
+        System.out.println(String.format(DEALER_CARDS_MESSAGE, dealer.getCards()));
         for (Player player : players) {
-            System.out.println(String.format(PLAYER_CARDS_MESSAGE, player.toString()));
+            System.out.println(String.format(PLAYER_CARDS_MESSAGE, player.getCards()));
         }
     }
 
@@ -48,12 +48,12 @@ public class OutputView {
     }
 
     public void printFinalDealerResult(Dealer dealer) {
-        System.out.println(String.format(FINAL_DEALER_RESULT_MESSAGE, dealer.toString(), dealer.calculateTotal()));
+        System.out.println(String.format(FINAL_DEALER_RESULT_MESSAGE, dealer.getCards(), dealer.calculateTotal()));
     }
 
     public void printFinalPlayerResult(List<Player> players) {
         for (Player player : players) {
-            System.out.println(String.format(FINAL_PLAYER_RESULT_MESSAGE, player.getName(), player.toString(),
+            System.out.println(String.format(FINAL_PLAYER_RESULT_MESSAGE, player.getName(), player.getCards(),
                     player.calculateTotal()));
         }
     }
