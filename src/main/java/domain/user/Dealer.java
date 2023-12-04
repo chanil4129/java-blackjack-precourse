@@ -11,11 +11,32 @@ import java.util.List;
 public class Dealer {
     private final List<Card> cards = new ArrayList<>();
 
-    public Dealer() {}
+    public Dealer() {
+    }
 
     public void addCard(Card card) {
         cards.add(card);
     }
 
-    // TODO 추가 기능 구현
+    public Card getFirstCard() {
+        return cards.get(0);
+    }
+
+    public int calculateTotal() {
+        return cards.stream()
+                .mapToInt(card -> card.getSymbol().getScore())
+                .sum();
+    }
+
+    public boolean validateDraw() {
+        return calculateTotal() <= 16;
+    }
+
+    public boolean nonValidateDraw() {
+        return calculateTotal() > 16;
+    }
+
+    public boolean isOver21() {
+        return calculateTotal() > 21;
+    }
 }
