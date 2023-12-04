@@ -22,6 +22,13 @@ public class Player {
         cards.add(card);
     }
 
-    // TODO 추가 기능 구현
+    public int calculateTotal() {
+        return cards.stream()
+                .mapToInt(card -> card.getSymbol().getScore())
+                .sum();
+    }
 
+    public boolean isOver21() {
+        return calculateTotal() > 21;
+    }
 }
