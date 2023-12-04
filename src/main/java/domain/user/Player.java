@@ -18,6 +18,10 @@ public class Player {
         this.bettingMoney = bettingMoney;
     }
 
+    public String getName() {
+        return name;
+    }
+
     public void addCard(Card card) {
         cards.add(card);
     }
@@ -30,5 +34,28 @@ public class Player {
 
     public boolean isOver21() {
         return calculateTotal() > 21;
+    }
+
+    /**
+     * 처음 블랙잭인 경우
+     */
+    public int calculateOnlyPlayerBlackJackAtFirst() {
+        return (int) (bettingMoney * 2.5);
+    }
+
+    public int calculatePlayerWin() {
+        return (int) bettingMoney * 2;
+    }
+
+    public int calculateTie() {
+        return (int) bettingMoney;
+    }
+
+    public int calculateLose() {
+        return 0;
+    }
+
+    public int calculateRevenue(int resultMoney) {
+        return resultMoney - (int) bettingMoney;
     }
 }
