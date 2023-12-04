@@ -4,11 +4,13 @@ import domain.card.Card;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * 게임 참여자를 의미하는 객체
  */
 public class Player {
+    private final String TO_STRING_SEPARATOR = ", ";
     private final String name;
     private final double bettingMoney;
     private final List<Card> cards = new ArrayList<>();
@@ -18,10 +20,54 @@ public class Player {
         this.bettingMoney = bettingMoney;
     }
 
+    public String getName() {
+        return name;
+    }
+
     public void addCard(Card card) {
         cards.add(card);
     }
 
-    // TODO 추가 기능 구현
+    public int calculateTotal() {
+        return cards.stream()
+                .mapToInt(card -> card.getSymbol().getScore())
+                .sum();
+    }
 
+    public boolean isBelow21() {
+        return calculateTotal() <= 21;
+    }
+
+    public boolean isOver21() {
+        return calculateTotal() > 21;
+    }
+
+    /**
+     * 처음 블랙잭인 경우
+     */
+    public int calculateOnlyPlayerBlackJackAtFirst() {
+        return (int) (bettingMoney * 2.5);
+    }
+
+    public int calculatePlayerWin() {
+        return (int) bettingMoney * 2;
+    }
+
+    public int calculateTie() {
+        return (int) bettingMoney;
+    }
+
+    public int calculateLose() {
+        return 0;
+    }
+
+    public int calculateRevenue(int resultMoney) {
+        return resultMoney - (int) bettingMoney;
+    }
+
+    public String getCards() {
+        return cards.stream()
+                .map(Card::toString)
+                .collect(Collectors.joining(TO_STRING_SEPARATOR));
+    }
 }
