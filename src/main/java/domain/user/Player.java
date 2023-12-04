@@ -34,6 +34,10 @@ public class Player {
                 .sum();
     }
 
+    public boolean isBelow21() {
+        return calculateTotal() <= 21;
+    }
+
     public boolean isOver21() {
         return calculateTotal() > 21;
     }
